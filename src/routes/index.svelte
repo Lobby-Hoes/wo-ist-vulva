@@ -3,8 +3,9 @@
     import { onMount } from 'svelte';
     import { preloadAssets } from '$lib/preloadAssets';
     import { shuffle } from '$lib/shuffleArray';
-    import { isMobile } from '../lib/stores';
-    import BindWindowSize from '../lib/BindWindowSize.svelte';
+    import { isMobile } from '$lib/stores';
+    import BindWindowSize from '$lib/BindWindowSize.svelte';
+    import GameEndScreen from '$lib/GameEndScreen.svelte';
 
     let activeLevel = 0;
     const levelConfigs = [
@@ -100,9 +101,14 @@
         }
     });
 
+    let gameEnded = false;
+
     function levelCompletedCb() {
-        activeLevel++;
-        activeLevel %= levelConfigs.length;
+        if (activeLevel + 1 === levelConfigs.length) {
+            gameEnded = true;
+        } else {
+            activeLevel++;
+        }
     }
 
     $: loadingText = `lade${'.'.repeat(loadingIndicator % 4)}`;
@@ -120,6 +126,10 @@
     <h1>{loadingText}</h1>
 {:else}
     <Level {...levelConfigs[activeLevel]} {levelCompletedCb} />
+{/if}
+
+{#if gameEnded}
+    <GameEndScreen />
 {/if}
 
 <BindWindowSize />
