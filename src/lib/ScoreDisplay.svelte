@@ -17,6 +17,8 @@
         border-width: 2px;
         border-color: rgb(27, 27, 27);
         border-style: solid;
+        border-top: 0;
+        border-left: 0;
         padding: 0.8rem;
         border-bottom-right-radius: 0.8rem;
         position: absolute;
