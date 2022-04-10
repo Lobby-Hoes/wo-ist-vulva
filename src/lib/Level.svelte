@@ -1,6 +1,6 @@
 <script lang="ts">
     import RandomVulva from './RandomVulva.svelte';
-    import { fade } from 'svelte/transition';
+    import {fade} from 'svelte/transition';
     import ScoreDisplay from './ScoreDisplay.svelte';
     import MuteButton from './MuteButton.svelte';
     import { calcPlaygroundSize } from './stores';
@@ -66,6 +66,8 @@
                 backgroundAudioRef.play();
             });
         }
+
+        backgroundAudioRef.volume = vulvaFoundAudioRef.volume = levelCompletedAudioRef.volume = 0.1;
     });
 </script>
 
@@ -76,23 +78,23 @@
     {/if}
 
     {#key [backgroundImage]}
-        <img in:fade bind:this={imgRef} src={backgroundImage} />
+        <img in:fade bind:this={imgRef} src={backgroundImage}/>
     {/key}
 
     {#if imgRef}
         {#key vulvaPositionIndex}
             <div in:fade style="position: absolute; left: {x}%; top: {y}%; ">
-                <RandomVulva on:click={handleClick} {randomNumber} />
+                <RandomVulva on:click={handleClick} {randomNumber}/>
             </div>
         {/key}
     {/if}
 </div>
 
-<audio bind:this={backgroundAudioRef} src={music} autoplay loop />
-<audio bind:this={vulvaFoundAudioRef} src={vulvaFoundSound} />
-<audio bind:this={levelCompletedAudioRef} src={levelCompletedSound} />
+<audio bind:this={backgroundAudioRef} src={music} autoplay loop/>
+<audio bind:this={vulvaFoundAudioRef} src={vulvaFoundSound}/>
+<audio bind:this={levelCompletedAudioRef} src={levelCompletedSound}/>
 
-<svelte:window bind:innerWidth bind:innerHeight />
+<svelte:window bind:innerWidth bind:innerHeight/>
 
 <style>
     img {
