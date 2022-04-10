@@ -2,6 +2,7 @@
     import RandomVulva from './RandomVulva.svelte';
     import { fade } from 'svelte/transition';
     import ScoreDisplay from './ScoreDisplay.svelte';
+    import MuteButton from './MuteButton.svelte';
     import { calcPlaygroundSize } from './stores';
     import { onMount } from 'svelte';
 
@@ -70,6 +71,7 @@
 
 <div style={levelStyle}>
     <ScoreDisplay found={vulvaPositionIndex} of={vulvaPositions.length} />
+    <MuteButton found={vulvaPositionIndex} of={vulvaPositions.length} />
 
     {#key [backgroundImage]}
         <img in:fade bind:this={imgRef} src={backgroundImage} />
@@ -84,9 +86,9 @@
     {/if}
 </div>
 
-<audio bind:this={backgroundAudioRef} src={music} autoplay loop />
-<audio bind:this={vulvaFoundAudioRef} src={vulvaFoundSound} />
-<audio bind:this={levelCompletedAudioRef} src={levelCompletedSound} />
+<audio class="mutablePlayer" bind:this={backgroundAudioRef} src={music} autoplay loop />
+<audio class="mutablePlayer" bind:this={vulvaFoundAudioRef} src={vulvaFoundSound} />
+<audio class="mutablePlayer" bind:this={levelCompletedAudioRef} src={levelCompletedSound} />
 
 <svelte:window bind:innerWidth bind:innerHeight />
 
