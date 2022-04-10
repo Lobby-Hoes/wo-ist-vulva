@@ -16,7 +16,7 @@
         localStorage.setItem('sound', String(volume));
 
         for (const audio of audioRefs) {
-            audio.muted = !Boolean(volume);
+            audio.muted = !volume;
         }
     }
 </script>
