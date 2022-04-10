@@ -71,8 +71,8 @@
 
 <div style={levelStyle}>
     <ScoreDisplay found={vulvaPositionIndex} of={vulvaPositions.length} />
-{#if backgroundAudioRef && vulvaFoundAudioRef && levelCompletedAudioRef}
-    <MuteButton audioRefs={[backgroundAudioRef, vulvaFoundAudioRef, levelCompletedAudioRef]} />
+    {#if backgroundAudioRef && vulvaFoundAudioRef && levelCompletedAudioRef}
+        <MuteButton audioRefs={[backgroundAudioRef, vulvaFoundAudioRef, levelCompletedAudioRef]} />
     {/if}
 
     {#key [backgroundImage]}

@@ -5,8 +5,6 @@
 
     let soundOn = true;
 
-    localStorage.setItem('sound', '1');
-
     setVolume(Number(localStorage.getItem('sound')));
 
     function toggle() {
