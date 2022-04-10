@@ -1,33 +1,29 @@
 <script lang="ts">
     import FaVolumeMute from 'svelte-icons/fa/FaVolumeMute.svelte';
     import FaVolumeUp from 'svelte-icons/fa/FaVolumeUp.svelte';
+
     export let audioRefs: HTMLAudioElement[] = [];
 
-    let soundOn;
-    if (localStorage.getItem('sound')) {
-        soundOn = Boolean(Number(localStorage.getItem('sound')));
-        setVolume(Number(localStorage.getItem('sound')));
-    } else {
-        soundOn = true;
-        setVolume(1);
-    }
+    const STORAGE_KEY = 'muted';
+    let soundOn: boolean = !localStorage.getItem(STORAGE_KEY);
 
-    function toggle() {
-        soundOn = !Number(localStorage.getItem('sound'));
-        setVolume(Number(soundOn));
-    }
-
-    function setVolume(volume: number) {
-        localStorage.setItem('sound', String(volume));
+    function onToggle() {
+        if (soundOn) {
+            localStorage.setItem(STORAGE_KEY, '1');
+        } else {
+            localStorage.removeItem(STORAGE_KEY);
+        }
 
         for (const audio of audioRefs) {
-            audio.muted = !volume;
+            audio.muted = soundOn;
         }
+
+        soundOn = !soundOn;
     }
 </script>
 
 {#key soundOn}
-    <div on:click={toggle}>
+    <div on:click={onToggle}>
         {#if soundOn}
             <FaVolumeUp />
         {:else}
