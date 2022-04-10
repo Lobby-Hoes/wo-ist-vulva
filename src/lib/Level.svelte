@@ -2,8 +2,9 @@
     import RandomVulva from './RandomVulva.svelte';
     import {fade} from 'svelte/transition';
     import ScoreDisplay from './ScoreDisplay.svelte';
-    import {calcPlaygroundSize} from './stores';
-    import {onMount} from 'svelte';
+    import MuteButton from './MuteButton.svelte';
+    import { calcPlaygroundSize } from './stores';
+    import { onMount } from 'svelte';
 
     export let vulvaPositions: [x: number, y: number][] = [];
     export let backgroundImage: string = '';
@@ -71,7 +72,10 @@
 </script>
 
 <div style={levelStyle}>
-    <ScoreDisplay found={vulvaPositionIndex} of={vulvaPositions.length}/>
+    <ScoreDisplay found={vulvaPositionIndex} of={vulvaPositions.length} />
+    {#if backgroundAudioRef && vulvaFoundAudioRef && levelCompletedAudioRef}
+        <MuteButton audioRefs={[backgroundAudioRef, vulvaFoundAudioRef, levelCompletedAudioRef]} />
+    {/if}
 
     {#key [backgroundImage]}
         <img in:fade bind:this={imgRef} src={backgroundImage}/>
