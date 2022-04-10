@@ -2,6 +2,8 @@
     import FaVolumeMute from 'svelte-icons/fa/FaVolumeMute.svelte';
     import FaVolumeUp from 'svelte-icons/fa/FaVolumeUp.svelte';
 
+    export let audioRefs: HTMLAudioElement[] = [];
+
     let soundOn = true;
 
     localStorage.setItem('sound', '1');
@@ -34,7 +36,7 @@
     }
 </script>
 
-{#key found}
+{#key soundOn}
     <div on:click={toggle}>
         {#if soundOn}
             <FaVolumeUp />
@@ -64,11 +66,5 @@
         align-items: center;
         z-index: 10;
         color: black;
-    }
-
-    img {
-        width: max(3vh, 3vw);
-        height: max(3vh, 3vw);
-        padding-left: max(1vh, 1vw);
     }
 </style>
