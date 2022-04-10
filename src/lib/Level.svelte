@@ -48,7 +48,6 @@
     $: imgRefOnLoad =
         imgRef &&
         (imgRef.onload = () => {
-            console.log('imgLoaded');
             imgWidth = imgRef?.naturalWidth;
             imgHeight = imgRef?.naturalHeight;
         });

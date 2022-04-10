@@ -6,6 +6,7 @@
     import { isMobile } from '$lib/stores';
     import BindWindowSize from '$lib/BindWindowSize.svelte';
     import GameEndScreen from '$lib/GameEndScreen.svelte';
+    import { fireAnalyticsEvent } from '../lib/fireAnalyticsEvent';
 
     let activeLevel = 0;
     const levelConfigs = [
@@ -99,15 +100,20 @@
         if ($isMobile) {
             onpointerdown = () => document.body.requestFullscreen();
         }
+
+        fireAnalyticsEvent(`level-start-${activeLevel}`);
     });
 
     let gameEnded = false;
 
     function levelCompletedCb() {
+        fireAnalyticsEvent(`level-complete-${activeLevel}`);
+
         if (activeLevel + 1 === levelConfigs.length) {
             gameEnded = true;
         } else {
             activeLevel++;
+            fireAnalyticsEvent(`level-start-${activeLevel}`);
         }
     }
 

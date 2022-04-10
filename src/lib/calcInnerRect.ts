@@ -2,7 +2,6 @@ export function calcInnerRect(
     outerSize: { x: number; y: number },
     innerSize: { x: number; y: number }
 ) {
-    console.log(outerSize, innerSize);
     const innerAspectRatio = innerSize.x / innerSize.y;
     const outerAspectRatio = outerSize.x / outerSize.y;
 
