@@ -1,7 +1,6 @@
 <script lang="ts">
     import FaVolumeMute from 'svelte-icons/fa/FaVolumeMute.svelte';
     import FaVolumeUp from 'svelte-icons/fa/FaVolumeUp.svelte';
-
     export let audioRefs: HTMLAudioElement[] = [];
 
     let soundOn = true;
@@ -25,13 +24,13 @@
     }
 
     function setVolume(volume: number) {
-        let players: HTMLAudioElement[] = document.getElementsByClassName('mutablePlayer');
+        localStorage.setItem('sound', String(volume));
 
-        localStorage.setItem('sound', volume);
-
-        for (let index = 0; index < players.length; index++) {
-            const player = players[index];
-            player.volume = volume;
+        for (let index = 0; index < audioRefs.length; index++) {
+            const player = audioRefs[index];
+            if (player) {
+                player.volume = volume;
+            }
         }
     }
 </script>

@@ -71,7 +71,7 @@
 
 <div style={levelStyle}>
     <ScoreDisplay found={vulvaPositionIndex} of={vulvaPositions.length} />
-    <MuteButton />
+    <MuteButton audioRefs={[backgroundAudioRef, vulvaFoundAudioRef, levelCompletedAudioRef]} />
 
     {#key [backgroundImage]}
         <img in:fade bind:this={imgRef} src={backgroundImage} />
@@ -86,9 +86,9 @@
     {/if}
 </div>
 
-<audio class="mutablePlayer" bind:this={backgroundAudioRef} src={music} autoplay loop />
-<audio class="mutablePlayer" bind:this={vulvaFoundAudioRef} src={vulvaFoundSound} />
-<audio class="mutablePlayer" bind:this={levelCompletedAudioRef} src={levelCompletedSound} />
+<audio bind:this={backgroundAudioRef} src={music} autoplay loop />
+<audio bind:this={vulvaFoundAudioRef} src={vulvaFoundSound} />
+<audio bind:this={levelCompletedAudioRef} src={levelCompletedSound} />
 
 <svelte:window bind:innerWidth bind:innerHeight />
 
