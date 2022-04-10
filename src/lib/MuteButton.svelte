@@ -8,27 +8,15 @@
     setVolume(Number(localStorage.getItem('sound')));
 
     function toggle() {
-        let newVolume;
-
-        if (localStorage.getItem('sound') == '0') {
-            newVolume = 1;
-            soundOn = true;
-        } else {
-            newVolume = 0;
-            soundOn = false;
-        }
-
-        setVolume(newVolume);
+        soundOn = !Number(localStorage.getItem('sound'));
+        setVolume(Number(soundOn));
     }
 
     function setVolume(volume: number) {
         localStorage.setItem('sound', String(volume));
 
-        for (let index = 0; index < audioRefs.length; index++) {
-            const player = audioRefs[index];
-            if (player) {
-                player.volume = volume;
-            }
+        for (const audio of audioRefs) {
+            audio.muted = !Boolean(volume);
         }
     }
 </script>
