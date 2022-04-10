@@ -30,6 +30,8 @@
             max(0.1vw, 0.1vw) 0 max(0.2vw, 0.2vw) white,
             0 min(-0.1vw, -0.1vw) max(0.2vw, 0.2vw) white,
             min(-0.1vw, -0.1vw) 0 max(0.2vw, 0.2vw) white;
+        height: 3rem;
+        
     }
 
     img {

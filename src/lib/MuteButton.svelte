@@ -1,13 +1,10 @@
 <script lang="ts">
-    import { fly } from 'svelte/transition';
-
-    export let found: number = 0;
-    export let of: number = 0;
+    import FaVolumeMute from 'svelte-icons/fa/FaVolumeMute.svelte';
+    import FaVolumeUp from 'svelte-icons/fa/FaVolumeUp.svelte';
 
     let soundOn = true;
 
     localStorage.setItem('sound', '1');
-
 
     setVolume(Number(localStorage.getItem('sound')));
 
@@ -38,11 +35,19 @@
 </script>
 
 {#key found}
-    <div on:click={toggle}>{soundOn ? 'Mute' : 'Unmute'}</div>
+    <div on:click={toggle}>
+        {#if soundOn}
+            <FaVolumeUp />
+        {:else}
+            <FaVolumeMute />
+        {/if}
+    </div>
 {/key}
 
 <style>
     div {
+        height: 3rem;
+        width: 3rem;
         user-select: none;
         background-color: rgba(0, 0, 255, 0.185);
         border-width: 2px;
@@ -53,15 +58,12 @@
         padding: 0.8rem;
         border-bottom-left-radius: 0.8rem;
         position: absolute;
-        font-size: max(3vh, 3vw);
+
         display: flex;
         right: 0;
         align-items: center;
         z-index: 10;
-        text-shadow: 0 max(0.1vw, 0.1vw) max(0.2vw, 0.2vw) white,
-            max(0.1vw, 0.1vw) 0 max(0.2vw, 0.2vw) white,
-            0 min(-0.1vw, -0.1vw) max(0.2vw, 0.2vw) white,
-            min(-0.1vw, -0.1vw) 0 max(0.2vw, 0.2vw) white;
+        color: black;
     }
 
     img {

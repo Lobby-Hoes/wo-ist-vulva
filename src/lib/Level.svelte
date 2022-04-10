@@ -71,7 +71,7 @@
 
 <div style={levelStyle}>
     <ScoreDisplay found={vulvaPositionIndex} of={vulvaPositions.length} />
-    <MuteButton found={vulvaPositionIndex} of={vulvaPositions.length} />
+    <MuteButton />
 
     {#key [backgroundImage]}
         <img in:fade bind:this={imgRef} src={backgroundImage} />
