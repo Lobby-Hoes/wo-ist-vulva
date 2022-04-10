@@ -3,7 +3,7 @@
     import FaVolumeUp from 'svelte-icons/fa/FaVolumeUp.svelte';
     export let audioRefs: HTMLAudioElement[] = [];
 
-    let soundOn = Boolean(Number(localStorage.getItem('sound')));
+    let soundOn = localStorage.getItem('sound') ? Boolean(Number(localStorage.getItem('sound'))) : true;
 
     setVolume(Number(localStorage.getItem('sound')));
 
