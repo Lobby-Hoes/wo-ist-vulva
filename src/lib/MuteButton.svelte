@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { fade } from 'svelte/transition';
     import FaVolumeMute from 'svelte-icons/fa/FaVolumeMute.svelte';
     import FaVolumeUp from 'svelte-icons/fa/FaVolumeUp.svelte';
 
@@ -23,7 +24,7 @@
 </script>
 
 {#key soundOn}
-    <div on:click={onToggle}>
+    <div transition:fade={{ duration: 200 }} on:click={onToggle}>
         {#if soundOn}
             <FaVolumeUp />
         {:else}
