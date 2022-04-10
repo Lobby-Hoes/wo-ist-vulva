@@ -9,7 +9,10 @@ const config = {
 
     kit: {
         adapter: adapter({
-            fallback: "index.html"
+            // use docs dir for github pages
+            pages: 'docs',
+            assets: 'docs',
+            fallback: 'index.html'
         })
     }
 };
