@@ -10,12 +10,15 @@ export function preloadAssets(preloadSrcs: string[]) {
     ]);
 }
 
-async function preload(src: string, constructor: typeof Audio | typeof Image) {
+async function preload<T extends HTMLAudioElement | HTMLImageElement>(
+    src: string,
+    constructor: new () => T
+): Promise<T> {
     const asset = new constructor();
 
-    return new Promise<string>((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         const onLoad = () => {
-            resolve(src);
+            resolve(asset);
             asset.removeEventListener('canplaythrough', onLoad);
             asset.removeEventListener('load', onLoad);
         };
@@ -35,7 +38,9 @@ async function preload(src: string, constructor: typeof Audio | typeof Image) {
 
         asset.src = src;
 
-        if ('load' in asset) (asset as any).load();
+        if ('load' in asset) {
+            (asset as any).load();
+        }
     });
 }
 
