@@ -14,10 +14,28 @@ async function preload(src: string, constructor: typeof Audio | typeof Image) {
     const asset = new constructor();
 
     return new Promise<string>((resolve, reject) => {
-        asset.oncanplaythrough = () => resolve(src);
-        asset.onload = () => resolve(src);
-        asset.onabort = () => reject();
+        const onLoad = () => {
+            resolve(src);
+            asset.removeEventListener('canplaythrough', onLoad);
+            asset.removeEventListener('load', onLoad);
+        };
+
+        asset.addEventListener('canplaythrough', onLoad);
+        asset.addEventListener('load', onLoad);
+
+        const onError = (e) => {
+            reject(`failed to load ${src}`);
+            console.error(e);
+            asset.removeEventListener('error', onError);
+            asset.removeEventListener('abort', onError);
+        };
+
+        asset.addEventListener('error', onError);
+        asset.addEventListener('abort', onError);
+
         asset.src = src;
+
+        if ('load' in asset) (asset as any).load();
     });
 }
 
