@@ -9,7 +9,7 @@
         <style>
             :root {
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-                'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+                    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
             }
 
             body {
@@ -21,6 +21,30 @@
                 justify-content: center;
                 user-select: none;
             }
+            @media screen and (orientation: landscape) {
+                #rotate-device-warning {
+                    display: none;
+                }
+                #game {
+                    display: block;
+                }
+            }
+
+            @media screen and (orientation: portrait) {
+                #rotate-device-warning {
+                    display: block;
+                    width: 100%;
+                    background-color: #0000ff2f;
+                    border-color: #1b1b1b;
+                    border-width: 2px;
+                    border-style: solid;
+                    padding: 0.8rem;
+                    color: #000;
+                }
+                #game {
+                    display: none;
+                }
+            }
         </style>
 
         <script>
@@ -28,6 +52,11 @@
         </script>
     </head>
     <body>
-        <div>%svelte.body%</div>
+        <div id="game">
+            %svelte.body%
+        </div>
+        <div id="rotate-device-warning">
+            <p><b>Mobile users:</b> For the best experience, please hold your device in the landscape orientation.</p>
+        </div>
     </body>
 </html>
