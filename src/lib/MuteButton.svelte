@@ -39,7 +39,7 @@
         width: 3rem;
         user-select: none;
         background-color: rgba(0, 0, 255, 0.185);
-        border-width: 2px;
+        border-width: 0.15vw;
         border-color: rgb(27, 27, 27);
         border-style: solid;
         border-top: 0;
