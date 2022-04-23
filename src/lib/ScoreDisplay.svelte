@@ -26,10 +26,8 @@
         display: flex;
         align-items: center;
         z-index: 10;
-        text-shadow: 0 max(0.1vw, 0.1vw) max(0.2vw, 0.2vw) white,
-            max(0.1vw, 0.1vw) 0 max(0.2vw, 0.2vw) white,
-            0 min(-0.1vw, -0.1vw) max(0.2vw, 0.2vw) white,
-            min(-0.1vw, -0.1vw) 0 max(0.2vw, 0.2vw) white;
+        text-shadow: 0 0.1vw 0.2vw white, 0.1vw 0 0.2vw white, 0 -0.1vw 0.2vw white,
+            -0.1vw 0 0.2vw white;
         height: 3rem;
     }
 
