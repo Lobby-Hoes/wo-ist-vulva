@@ -8,6 +8,7 @@
     export let y: number = 0;
     export let style: string = '';
     export let innerStyle: string = '';
+    export let size: number = 1;
 
     let img: HTMLImageElement;
     let width: number;
@@ -32,12 +33,13 @@
     $: sliceWidth = (width / xSlices) | 0;
     $: sliceHeight = (height / ySlices) | 0;
     $: imgStyle =
-        (sliceWidth && sliceHeight && `left: -${x * sliceWidth}px; top: -${y * sliceHeight}px;`) ??
-        'display: none';
+        `left: -${x * size}px; top: -${y * size}px; width: ${xSlices * size}px; height: ${
+            ySlices * size
+        }px` ?? 'display: none';
 </script>
 
-<div on:click style="width: {sliceWidth}px; height: {sliceHeight}px; {style}">
-    <img bind:this={img} {src} style={imgStyle + innerStyle} />
+<div on:click style="width: {size}px; height: {size}px; {style}">
+    <img bind:this={img} {src} style={imgStyle + '; ' + innerStyle} />
 </div>
 
 <style>

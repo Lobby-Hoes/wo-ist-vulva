@@ -18,3 +18,5 @@ export const calcPlaygroundSize = derived(
 const MOBILE_MAX_WIDTH = 800;
 
 export const isMobile = derived(windowSize, ($windowSize) => $windowSize.x <= MOBILE_MAX_WIDTH);
+
+export const assetUrls = writable<Record<string, string>>({});
