@@ -12,6 +12,8 @@
     let loadingIndicatorDots = 0;
     let maxLevel = -1;
 
+    const onUnhandledRejection = (e) => alert('something went wrong:\n' + e.reason);
+
     onMount(async () => {
         setInterval(() => {
             loadingIndicatorDots++;
@@ -50,10 +52,6 @@
     }
 
     $: loadingText = 'lade level ' + (maxLevel + 2) + '.'.repeat(loadingIndicatorDots % 4);
-
-    const onUnhandledRejection = (e) => {
-        alert('something went wrong:\n' + e.reason);
-    };
 
     const { levels, vulvaSpriteSheet, gameEndImage, ...partialLevelConfig } = gameConfig;
     $: levelConfig = { ...partialLevelConfig, ...levels[activeLevel], levelCompletedCb };
