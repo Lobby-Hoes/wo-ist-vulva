@@ -55,8 +55,8 @@
         alert('something went wrong:\n' + e.reason);
     };
 
-    const { levels, ...gameConfigWithoutLevels } = gameConfig;
-    $: levelConfig = { ...gameConfigWithoutLevels, ...levels[activeLevel], levelCompletedCb };
+    const { levels, vulvaSpriteSheet, gameEndImage, ...partialLevelConfig } = gameConfig;
+    $: levelConfig = { ...partialLevelConfig, ...levels[activeLevel], levelCompletedCb };
 </script>
 
 <svelte:head>
