@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { fly } from 'svelte/transition';
+    import { fly, fade } from 'svelte/transition';
 
     export let found: number = 0;
     export let of: number = 0;
 </script>
 
 {#key found}
-    <div>
+    <div in:fade>
         {found} / {of} <img in:fly={{ y: -50 }} src="favicon.png" />
     </div>
 {/key}
@@ -31,7 +31,6 @@
             0 min(-0.1vw, -0.1vw) max(0.2vw, 0.2vw) white,
             min(-0.1vw, -0.1vw) 0 max(0.2vw, 0.2vw) white;
         height: 3rem;
-        
     }
 
     img {
