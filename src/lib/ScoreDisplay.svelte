@@ -5,11 +5,11 @@
     export let of: number = 0;
 </script>
 
-{#key found}
-    <div in:fade>
+<div in:fade>
+    {#key found}
         {found} / {of} <img in:fly={{ y: -50 }} src="favicon.png" />
-    </div>
-{/key}
+    {/key}
+</div>
 
 <style>
     div {
