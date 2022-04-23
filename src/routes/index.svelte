@@ -9,10 +9,14 @@
 
     let activeLevel = 0;
     let gameEnded = false;
-
+    let loadingIndicatorDots = 0;
     let maxLevel = -1;
 
     onMount(async () => {
+        setInterval(() => {
+            loadingIndicatorDots++;
+        }, 500);
+
         await preloadAssets([
             gameConfig.levels[0].backgroundImage,
             gameConfig.music,
@@ -45,7 +49,7 @@
         activeLevel++;
     }
 
-    $: loadingText = 'lade level ' + (maxLevel + 2);
+    $: loadingText = 'lade level ' + (maxLevel + 2) + '.'.repeat(loadingIndicatorDots % 4);
 
     const onUnhandledRejection = (e) => {
         alert('something went wrong:\n' + e.reason);
