@@ -7,13 +7,8 @@
     let secondsLeft = seconds;
 
     onMount(() => {
-        setTimeout(() => {
-            window.location.href = url;
-        }, seconds * 1000);
-
-        setInterval(() => {
-            secondsLeft--;
-        }, 1000);
+        setTimeout(() => (window.location.href = url), seconds * 1000);
+        setInterval(() => secondsLeft > 0 && secondsLeft--, 1000);
     });
 </script>
 
