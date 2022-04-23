@@ -33,17 +33,37 @@
             @media screen and (orientation: portrait) {
                 #rotate-device-warning {
                     display: block;
-                    width: 100%;
+                    position: absolute;
+                    width: 90%;
+                    z-index: 1;
                     background-color: #0000ff2f;
                     border-color: #1b1b1b;
                     border-width: 2px;
                     border-style: solid;
+                    border-radius: 0.8rem 0.8rem 0.8rem 0.8rem;
                     padding: 0.8rem;
                     color: #000;
+                    animation-name: display-warning;
+                    animation-duration: 2s;
+                    animation-delay: 4s;
+                    animation-fill-mode: forwards;
                 }
+                @keyframes display-warning {
+                    from {visibility: visible;}
+                    to {visibility: hidden;}
+                  }
                 #game {
-                    display: none;
+                    display: block;
+                    opacity: 0;
+                    animation-name: display-game;
+                    animation-duration: 2s;
+                    animation-delay: 5s;
+                    animation-fill-mode: forwards;
                 }
+                @keyframes display-game {
+                    from {opacity: 0;}
+                    to {opacity: 1;}
+                  }
             }
         </style>
 
