@@ -1,13 +1,24 @@
 <script lang="ts">
     import { fly, fade } from 'svelte/transition';
+    import FixedSizeText from './FixedSizeText.svelte';
+    import { playgroundSize } from './stores';
 
     export let found: number = 0;
     export let of: number = 0;
 </script>
 
-<div in:fade>
+<div in:fade style="padding: {$playgroundSize.x * 0.01}px">
+    <FixedSizeText
+        width={$playgroundSize.x * 0.1}
+        height={$playgroundSize.y * 0.1}
+        text="{found} / {of}"
+    />
     {#key found}
-        {found} / {of} <img in:fly={{ y: -50 }} src="favicon.png" />
+        <img
+            in:fly={{ y: -50 }}
+            src="favicon.png"
+            style="width: {$playgroundSize.x * 0.03}px; margin-left: {$playgroundSize.x * 0.01}px;"
+        />
     {/key}
 </div>
 
@@ -19,21 +30,12 @@
         border-style: solid;
         border-top: 0;
         border-left: 0;
-        padding: 0.8rem;
         border-bottom-right-radius: 0.8rem;
         position: absolute;
-        font-size: max(3vh, 3vw);
         display: flex;
         align-items: center;
         z-index: 10;
         text-shadow: 0 0.1vw 0.2vw white, 0.1vw 0 0.2vw white, 0 -0.1vw 0.2vw white,
             -0.1vw 0 0.2vw white;
-        height: 3rem;
-    }
-
-    img {
-        width: max(3vh, 3vw);
-        height: max(3vh, 3vw);
-        padding-left: max(1vh, 1vw);
     }
 </style>

@@ -11,9 +11,14 @@ export const windowSize = derived([windowWidth, windowHeight], ([$windowWidth, $
 
 export const calcPlaygroundSize = derived(
     windowSize,
-    ($windowSize) => (imgWidth: number, imgHeight: number) =>
-        calcInnerRect($windowSize, { x: imgWidth, y: imgHeight })
+    ($windowSize) => (imgWidth: number, imgHeight: number) => {
+        const size = calcInnerRect($windowSize, { x: imgWidth, y: imgHeight });
+        playgroundSize.set(size);
+        return size;
+    }
 );
+
+export const playgroundSize = writable({ x: 0, y: 0 });
 
 const MOBILE_MAX_WIDTH = 800;
 
