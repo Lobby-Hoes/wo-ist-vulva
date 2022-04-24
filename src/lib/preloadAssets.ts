@@ -2,7 +2,7 @@ import { timeout } from './timeout';
 import { assetUrls } from './stores';
 
 export function preloadAsset(preloadSrc: string) {
-    return preloadAssets([preloadSrc]);
+    return preloadAssets([preloadSrc]).then((x) => x[0]);
 }
 
 export function preloadAssets(preloadSrcs: string[]) {
