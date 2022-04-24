@@ -9,16 +9,29 @@ export const windowSize = derived([windowWidth, windowHeight], ([$windowWidth, $
     y: $windowHeight
 }));
 
-export const calcPlaygroundSize = derived(
-    windowSize,
-    ($windowSize) => (imgWidth: number, imgHeight: number) => {
+export const playgroundSize = writable({ x: 0, y: 0 });
+
+export const calcPlaygroundSize = derived(windowSize, ($windowSize) => {
+    return (imgWidth: number, imgHeight: number) => {
         const size = calcInnerRect($windowSize, { x: imgWidth, y: imgHeight });
         playgroundSize.set(size);
         return size;
+    };
+});
+
+export const firstBackgroundSize = writable<{ x: number; y: number }>();
+
+export const initialPlaygroundSize = derived(
+    [windowSize, firstBackgroundSize],
+    ([$windowSize, $firstBackgroundSize]) => {
+        const x = $firstBackgroundSize
+            ? calcInnerRect($windowSize, $firstBackgroundSize)
+            : { x: 0, y: 0 };
+        console.log(x);
+
+        return x;
     }
 );
-
-export const playgroundSize = writable({ x: 0, y: 0 });
 
 const MOBILE_MAX_WIDTH = 800;
 

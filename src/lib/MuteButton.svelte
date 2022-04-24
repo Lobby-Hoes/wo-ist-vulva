@@ -2,7 +2,7 @@
     import { fade } from 'svelte/transition';
     import FaVolumeMute from 'svelte-icons/fa/FaVolumeMute.svelte';
     import FaVolumeUp from 'svelte-icons/fa/FaVolumeUp.svelte';
-    import { playgroundSize } from './stores';
+    import { initialPlaygroundSize } from './stores';
 
     export let audioRefs: HTMLAudioElement[] = [];
 
@@ -22,14 +22,14 @@
 
         soundOn = !soundOn;
     }
+
+    $: style = `height: ${$initialPlaygroundSize.y * 0.1}px; width: ${
+        $initialPlaygroundSize.x * 0.07
+    }px; padding: ${$initialPlaygroundSize.x * 0.01}px;`;
 </script>
 
 {#key soundOn}
-    <div
-        transition:fade={{ duration: 200 }}
-        on:click={onToggle}
-        style="height: {$playgroundSize.y * 0.1}px; padding: {$playgroundSize.x * 0.01}px;"
-    >
+    <div transition:fade={{ duration: 200 }} on:click={onToggle} {style}>
         {#if soundOn}
             <FaVolumeUp />
         {:else}
@@ -47,7 +47,7 @@
         border-style: solid;
         border-top: 0;
         border-right: 0;
-        border-bottom-left-radius: 0.8rem;
+        border-bottom-left-radius: 0.5vw;
         position: absolute;
 
         display: flex;

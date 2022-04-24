@@ -3,7 +3,7 @@
     import { fade } from 'svelte/transition';
     import ScoreDisplay from './ScoreDisplay.svelte';
     import MuteButton from './MuteButton.svelte';
-    import { calcPlaygroundSize, assetUrls } from './stores';
+    import { calcPlaygroundSize, assetUrls, playgroundSize } from './stores';
     import { onMount } from 'svelte';
 
     export let vulvaPositions: [x: number, y: number][] = [];
@@ -46,19 +46,15 @@
     let imgWidth: number;
     let imgHeight: number;
 
-    $: imgRefOnLoad =
-        imgRef &&
+    $: imgRef &&
         (imgRef.onload = () => {
-            imgWidth = imgRef?.naturalWidth;
-            imgHeight = imgRef?.naturalHeight;
+            imgWidth = imgRef.naturalWidth;
+            imgHeight = imgRef.naturalHeight;
         });
 
-    $: playgroundSize =
-        !isNaN(imgWidth) && !isNaN(imgHeight) && $calcPlaygroundSize(imgWidth, imgHeight);
+    $: !isNaN(imgWidth) && !isNaN(imgHeight) && $calcPlaygroundSize(imgWidth, imgHeight);
 
-    $: levelStyle =
-        typeof playgroundSize === 'object' &&
-        `position: relative; width: ${playgroundSize.x}px; height: ${playgroundSize.y}px`;
+    $: levelStyle = `position: relative; width: ${$playgroundSize.x}px; height: ${$playgroundSize.y}px`;
 
     onMount(() => {
         if (backgroundAudioRef.paused) {
@@ -84,7 +80,11 @@
     {#if imgRef}
         {#key vulvaPositionIndex}
             <div in:fade style="position: absolute; left: {x}%; top: {y}%; ">
-                <RandomVulva on:click={handleClick} {randomNumber} {playgroundSize} />
+                <RandomVulva
+                    on:click={handleClick}
+                    {randomNumber}
+                    playgroundSize={$playgroundSize}
+                />
             </div>
         {/key}
     {/if}

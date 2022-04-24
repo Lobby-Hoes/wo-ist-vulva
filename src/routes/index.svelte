@@ -2,7 +2,7 @@
     import Level from '$lib/Level.svelte';
     import { onMount } from 'svelte';
     import { preloadAsset, preloadAssets } from '$lib/preloadAssets';
-    import { isMobile } from '$lib/stores';
+    import { isMobile, firstBackgroundSize } from '$lib/stores';
     import BindWindowSize from '$lib/BindWindowSize.svelte';
     import GameEndScreen from '$lib/GameEndScreen.svelte';
     import { gameConfig } from '$lib/gameConfig';
@@ -12,30 +12,32 @@
     let loadingIndicatorDots = 0;
     let maxLevel = -1;
 
-    const onUnhandledRejection = (e) => alert('something went wrong:\n' + e.reason);
+    const onUnhandledRejection = (e: PromiseRejectionEvent) =>
+        alert(`something went wrong:\n${e.reason}`);
 
     onMount(async () => {
-        setInterval(() => {
-            loadingIndicatorDots++;
-        }, 500);
+        setInterval(() => loadingIndicatorDots++, 500);
 
         await preloadAssets([
-            gameConfig.levels[0].backgroundImage,
             gameConfig.music,
             gameConfig.levelCompletedSound,
             gameConfig.vulvaFoundSound,
             gameConfig.vulvaSpriteSheet
         ]);
 
-        maxLevel = 0;
-
         if ($isMobile) {
             onpointerdown = () => document.body.requestFullscreen();
         }
 
-        for (const src of gameConfig.levels.slice(1).map((l) => l.backgroundImage)) {
-            await preloadAsset(src);
+        for (const src of gameConfig.levels.map((l) => l.backgroundImage)) {
+            const objUrl = await preloadAsset(src);
             maxLevel++;
+
+            if (maxLevel === 0) {
+                const img = new Image();
+                img.onload = () => firstBackgroundSize.set({ x: img.width, y: img.height });
+                img.src = objUrl;
+            }
         }
 
         const gameEndImg = new Image();
@@ -51,7 +53,9 @@
         activeLevel++;
     }
 
-    $: loadingText = 'lade level ' + (maxLevel + 2) + '.'.repeat(loadingIndicatorDots % 4);
+    $: loadingText =
+        (maxLevel === -1 ? 'lade' : 'lade level ' + (maxLevel + 2)) +
+        '.'.repeat(loadingIndicatorDots % 4);
 
     const { levels, vulvaSpriteSheet, gameEndImage, ...partialLevelConfig } = gameConfig;
     $: levelConfig = { ...partialLevelConfig, ...levels[activeLevel], levelCompletedCb };
