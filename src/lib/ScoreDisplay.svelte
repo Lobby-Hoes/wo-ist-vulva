@@ -19,6 +19,7 @@
             src="favicon.png"
             style="width: {$initialPlaygroundSize.x *
                 0.05}px; margin-left: {$initialPlaygroundSize.x * 0.01}px;"
+            alt="favicon"
         />
     {/key}
 </div>

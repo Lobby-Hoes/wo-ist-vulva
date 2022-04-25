@@ -74,7 +74,7 @@
     {/if}
 
     {#key backgroundImage}
-        <img in:fade bind:this={imgRef} src={$assetUrls[backgroundImage]} />
+        <img in:fade bind:this={imgRef} src={$assetUrls[backgroundImage]} alt="background Image"/>
     {/key}
 
     {#if imgRef}
