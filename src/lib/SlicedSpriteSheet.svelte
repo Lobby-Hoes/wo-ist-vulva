@@ -39,7 +39,7 @@
 </script>
 
 <div on:click style="width: {size}px; height: {size}px; {style}">
-    <img bind:this={img} {src} style={imgStyle + '; ' + innerStyle} alt="Vulva"/>
+    <img alt="Vulva" bind:this={img} {src} style={imgStyle + '; ' + innerStyle} />
 </div>
 
 <style>

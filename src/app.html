@@ -2,9 +2,10 @@
 <html lang="de">
     <head>
         <meta charset="utf-8" />
-        <meta name="description" content='Findest du die Vulva? Ein Spiel basierend auf Wimmelbildern etwickelt für den podcast "Hobbylos" von Rezo und Julien Bam. https://github.com/Lobby-Hoes/wo-ist-vulva' />
+        <meta name="description" content='Ein Spiel basierend auf Wimmelbildern etwickelt für den podcast "Hobbylos" von Rezo und Julien Bam. https://github.com/Lobby-Hoes/wo-ist-vulva' />
+        <title>Wo Ist Vulva? Ein Spiel von Lobbyhoes für Lobbyhoes</title>
         <link rel="icon" href="%svelte.assets%/favicon.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1, user-scalable=no" />
         %svelte.head%
         <style>
             :root {
@@ -72,12 +73,13 @@
         </script>
     </head>
     <body>
+        <h1 style="visibility: hidden; position: absolute;">Wo ist Vulva?</h1>
         <div id="game">
             %svelte.body%
         </div>
         <div id="rotate-device-warning">
-            <p><b>Handybenutzer:</b> Bitte halten Sie Ihr Gerät in Querformat.</p>
-            <p><b>Mobile users:</b> Please hold your device in the landscape orientation.</p>
+            <h2><b>Handybenutzer:</b> Bitte halten Sie Ihr Gerät in Querformat.</h2>
+            <h3><b>Mobile users:</b> Please hold your device in the landscape orientation.</h3>
         </div>
     </body>
 </html>
