@@ -6,13 +6,7 @@ export function preloadAsset(preloadSrc: string) {
 }
 
 export function preloadAssets(preloadSrcs: string[]) {
-    const imgSrcs = preloadSrcs.filter(isImage);
-    const audioSrcs = preloadSrcs.filter(isAudio);
-
-    return awaitPromisesWithTimeout([
-        ...imgSrcs.map((src) => load(src)),
-        ...audioSrcs.map((src) => load(src))
-    ]);
+    return awaitPromisesWithTimeout(preloadSrcs.map(load));
 }
 
 function load(url: string): Promise<string> {
@@ -39,14 +33,6 @@ function load(url: string): Promise<string> {
             reject(err.message);
         }
     });
-}
-
-function isAudio(src: string) {
-    return /\.(?:wav|mp3)/.test(src);
-}
-
-function isImage(src: string) {
-    return /\.(?:png|jpg)/.test(src);
 }
 
 async function awaitPromisesWithTimeout(promises: Promise<string>[]) {
