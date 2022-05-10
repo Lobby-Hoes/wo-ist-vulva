@@ -64,10 +64,10 @@
 <svelte:head>
     {#if maxLevel < activeLevel}
         {#key loadingText}
-            <title>{loadingText}</title>
+            <!--<title>{loadingText}</title>-->
         {/key}
     {:else}
-        <title>Wo Ist Vulva?</title>
+        <!--<title>Wo Ist Vulva?</title>-->
     {/if}
 </svelte:head>
 
