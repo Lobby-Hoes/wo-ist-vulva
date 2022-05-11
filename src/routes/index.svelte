@@ -61,16 +61,6 @@
     $: levelConfig = { ...partialLevelConfig, ...levels[activeLevel], levelCompletedCb };
 </script>
 
-<svelte:head>
-    {#if maxLevel < activeLevel}
-        {#key loadingText}
-            <!--<title>{loadingText}</title>-->
-        {/key}
-    {:else}
-        <!--<title>Wo Ist Vulva?</title>-->
-    {/if}
-</svelte:head>
-
 {#if maxLevel < activeLevel}
     <h1>{loadingText}</h1>
 {:else}
