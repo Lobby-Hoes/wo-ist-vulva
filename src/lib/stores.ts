@@ -21,15 +21,16 @@ export const calcPlaygroundSize = derived(windowSize, ($windowSize) => {
 
 export const firstBackgroundSize = writable<{ x: number; y: number }>();
 
-export const initialPlaygroundSize = derived(
+// usages of screensize depend on the first image beeing loaded.
+// screenSize returns initially empty values, after the first image is loaded the window size is returned.
+export const screenSize = derived(
     [windowSize, firstBackgroundSize],
     ([$windowSize, $firstBackgroundSize]) => {
-        const x = $firstBackgroundSize
-            ? calcInnerRect($windowSize, $firstBackgroundSize)
-            : { x: 0, y: 0 };
-        console.log(x);
+        if ($firstBackgroundSize) {
+            return { x: $windowSize.x, y: $windowSize.y };
+        }
 
-        return x;
+        return { x: 0, y: 0 };
     }
 );
 
