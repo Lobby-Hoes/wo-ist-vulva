@@ -59,7 +59,7 @@
     onMount(() => {
         if (backgroundAudioRef.paused) {
             window.addEventListener('pointerdown', () => {
-                backgroundAudioRef.play();
+                backgroundAudioRef?.play();
             });
         }
 
@@ -74,7 +74,7 @@
     {/if}
 
     {#key backgroundImage}
-        <img alt="background Image" in:fade bind:this={imgRef} src={$assetUrls[backgroundImage]}/>
+        <img alt="background Image" in:fade bind:this={imgRef} src={$assetUrls[backgroundImage]} />
     {/key}
 
     {#if imgRef}

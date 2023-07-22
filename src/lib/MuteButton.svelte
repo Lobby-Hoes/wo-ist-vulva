@@ -2,7 +2,7 @@
     import { fade } from 'svelte/transition';
     import FaVolumeMute from 'svelte-icons/fa/FaVolumeMute.svelte';
     import FaVolumeUp from 'svelte-icons/fa/FaVolumeUp.svelte';
-    import { initialPlaygroundSize } from './stores';
+    import { screenSize } from './stores';
 
     export let audioRefs: HTMLAudioElement[] = [];
 
@@ -22,24 +22,22 @@
 
         soundOn = !soundOn;
     }
-
-    $: style = `height: ${$initialPlaygroundSize.y * 0.1}px; width: ${
-        $initialPlaygroundSize.x * 0.07
-    }px; padding: ${$initialPlaygroundSize.x * 0.01}px;`;
 </script>
 
 {#key soundOn}
-    <div transition:fade={{ duration: 200 }} on:click={onToggle} {style}>
-        {#if soundOn}
-            <FaVolumeUp />
-        {:else}
-            <FaVolumeMute />
-        {/if}
+    <div class="container" transition:fade={{ duration: 200 }} on:click={onToggle}>
+        <div class="inner">
+            {#if soundOn}
+                <FaVolumeUp />
+            {:else}
+                <FaVolumeMute />
+            {/if}
+        </div>
     </div>
 {/key}
 
 <style>
-    div {
+    div.container {
         user-select: none;
         background-color: rgba(0, 0, 255, 0.185);
         border-width: 0.15vw;
@@ -50,10 +48,22 @@
         border-bottom-left-radius: 0.5vw;
         position: absolute;
 
-        display: flex;
         right: 0;
-        align-items: center;
         z-index: 10;
         color: black;
+
+        height: 7vh;
+        width: 7vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    div.inner {
+        height: 5vh;
+        width: 5vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 </style>
