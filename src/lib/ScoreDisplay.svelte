@@ -1,29 +1,27 @@
 <script lang="ts">
     import { fly, fade } from 'svelte/transition';
-    import FixedSizeText from './FixedSizeText.svelte';
-    import { screenSize } from './stores';
 
     export let found: number = 0;
     export let of: number = 0;
 </script>
 
 <div in:fade>
-    <FixedSizeText
-        width={$screenSize.x * 0.1}
-        height={$screenSize.y * 0.065}
-        text="{found} / {of}"
-    />
+    <span>{found} / {of}</span>
     {#key found}
-        <img
-            alt="favicon"
-            in:fly={{ y: -50 }}
-            src="favicon.png"
-            style="width: {$screenSize.x * 0.05}px; margin-left: {$screenSize.x * 0.01}px;"
-        />
+        <img alt="favicon" in:fly={{ y: -50 }} src="favicon.png" />
     {/key}
 </div>
 
 <style>
+    img {
+        width: 7vh;
+        margin-left: 1vh;
+    }
+
+    span {
+        font-size: 6vh;
+    }
+
     div {
         height: 7vh;
 
