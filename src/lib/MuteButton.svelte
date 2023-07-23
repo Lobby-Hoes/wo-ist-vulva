@@ -2,7 +2,6 @@
     import { fade } from 'svelte/transition';
     import FaVolumeMute from 'svelte-icons/fa/FaVolumeMute.svelte';
     import FaVolumeUp from 'svelte-icons/fa/FaVolumeUp.svelte';
-    import { screenSize } from './stores';
 
     export let audioRefs: HTMLAudioElement[] = [];
 

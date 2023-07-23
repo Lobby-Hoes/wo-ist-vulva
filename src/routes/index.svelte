@@ -2,7 +2,7 @@
     import Level from '$lib/Level.svelte';
     import { onMount } from 'svelte';
     import { preloadAsset, preloadAssets } from '$lib/preloadAssets';
-    import { isMobile, firstBackgroundSize } from '$lib/stores';
+    import { isMobile } from '$lib/stores';
     import BindWindowSize from '$lib/BindWindowSize.svelte';
     import GameEndScreen from '$lib/GameEndScreen.svelte';
     import { gameConfig } from '$lib/gameConfig';
@@ -35,7 +35,6 @@
 
             if (maxLevel === 0) {
                 const img = new Image();
-                img.onload = () => firstBackgroundSize.set({ x: img.width, y: img.height });
                 img.src = objUrl;
             }
         }
